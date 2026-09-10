@@ -1,0 +1,313 @@
+:root {
+  --ink: #11110f;
+  --bone: #e8e4d9;
+  --mute: color-mix(in srgb, var(--bone) 46%, transparent);
+  --hair: color-mix(in srgb, var(--bone) 16%, transparent);
+  --seal: #b3332a;
+  --seal-ink: #f6efe8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--bone);
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.stage {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(2rem, 8vw, 6rem);
+  padding-bottom: clamp(3.25rem, 8vw, 6.5rem);
+}
+
+.saying {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: min(58rem, 94vw);
+  text-align: center;
+}
+
+.saying.is-leaving {
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.saying.is-entering {
+  animation: rise 720ms ease both;
+}
+
+.verse {
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC",
+    "SimSun", serif;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0.7rem 1rem 0 0.2rem;
+}
+
+.verse.is-flash {
+  font-size: clamp(2.15rem, 5.5vw, 2.75rem);
+  letter-spacing: 0;
+  text-indent: 0;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.verse.is-short {
+  font-size: clamp(1.4rem, 3.4vw, 1.8rem);
+  white-space: nowrap;
+}
+
+.verse.is-long {
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
+  line-height: 1.55;
+}
+
+.verse.is-wrapped {
+  white-space: normal;
+}
+
+.verse-end {
+  position: relative;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.gloss {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--seal);
+  color: var(--seal-ink);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.48rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  transform: translate(42%, -38%);
+  cursor: default;
+  appearance: none;
+}
+
+.gloss:focus,
+.gloss:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--seal-ink) 70%, var(--seal));
+  outline-offset: 2px;
+}
+
+.gloss-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.55rem);
+  z-index: 2;
+  min-width: 8rem;
+  max-width: min(22rem, 72vw);
+  padding: 0.42rem 0.62rem;
+  border: 1px solid var(--hair);
+  background: #1c1b18;
+  color: var(--bone);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-indent: 0;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.verse-end:hover .gloss-tip,
+.gloss:hover + .gloss-tip,
+.gloss:focus + .gloss-tip,
+.gloss:focus-visible + .gloss-tip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.source {
+  font-family: "PingFang TC", "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans CJK TC", "Noto Sans CJK SC", "Source Han Sans TC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: clamp(0.95rem, 1.7vw, 1.08rem);
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+  max-width: 26em;
+  text-wrap: balance;
+}
+
+.source-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.source-link:hover,
+.source-link:focus-visible {
+  color: color-mix(in srgb, var(--bone) 70%, transparent);
+}
+
+.source-link:focus,
+.source-link:focus-visible {
+  outline: none;
+}
+
+.verse.is-bible {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-indent: 0;
+}
+
+.katsu-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem 1.15rem;
+  pointer-events: none;
+}
+
+.katsu-switch {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--bone) 28%, transparent);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+}
+
+.katsu-word {
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC",
+    "SimSun", serif;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.katsu-switch:hover,
+.katsu-switch:focus,
+.katsu-switch:focus-visible {
+  color: color-mix(in srgb, var(--bone) 48%, transparent);
+}
+
+.katsu-switch:focus,
+.katsu-switch:focus-visible {
+  outline: 1px solid var(--hair);
+  outline-offset: 4px;
+}
+
+.source::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  margin: 0 auto 1.75rem;
+  background: var(--hair);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.55rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .stage {
+    padding: 2rem 1.25rem;
+  }
+
+  .verse.is-flash {
+    font-size: clamp(1.85rem, 8vw, 2.25rem);
+  }
+
+  .verse.is-short {
+    font-size: clamp(1.2rem, 4.2vw, 1.5rem);
+    letter-spacing: 0.1em;
+    text-indent: 0.1em;
+  }
+
+  .verse.is-long {
+    font-size: clamp(1.05rem, 3.6vw, 1.28rem);
+  }
+
+  .verse.is-bible.is-short,
+  .verse.is-bible.is-long {
+    letter-spacing: 0.02em;
+    text-indent: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saying.is-leaving,
+  .saying.is-entering {
+    animation: none;
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
