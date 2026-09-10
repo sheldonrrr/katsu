@@ -15,7 +15,19 @@ const SOURCE_WIKI = {
   以賽亞書: "https://zh.wikipedia.org/wiki/以賽亞書",
   馬太福音: "https://zh.wikipedia.org/wiki/馬太福音",
   路加福音: "https://zh.wikipedia.org/wiki/路加福音",
-  加拉太書: "https://zh.wikipedia.org/wiki/加拉太書"
+  加拉太書: "https://zh.wikipedia.org/wiki/加拉太書",
+  "Ted Chiang": "https://zh.wikipedia.org/wiki/姜峯楠",
+  "Bender & Gebru": "https://zh.wikipedia.org/wiki/随机鹦鹉",
+  "Bender & Koller": "https://en.wikipedia.org/wiki/Emily_M._Bender",
+  Hinton: "https://zh.wikipedia.org/wiki/杰弗里·辛顿",
+  "Jan Leike": "https://en.wikipedia.org/wiki/Jan_Leike",
+  Karpathy: "https://en.wikipedia.org/wiki/Andrej_Karpathy",
+  "Shannon Vallor": "https://en.wikipedia.org/wiki/Shannon_Vallor",
+  "Melanie Mitchell": "https://en.wikipedia.org/wiki/Melanie_Mitchell",
+  "Gary Marcus": "https://en.wikipedia.org/wiki/Gary_Marcus",
+  "Simon Willison": "https://en.wikipedia.org/wiki/Simon_Willison",
+  Sutskever: "https://en.wikipedia.org/wiki/Ilya_Sutskever",
+  "Foundation Models": "https://en.wikipedia.org/wiki/Foundation_model"
 };
 
 const CORPORA = {
@@ -241,6 +253,113 @@ const CORPORA = {
       text: "The world is crucified unto me, and I unto the world",
       source: "加拉太書",
       gloss: "世界已经向我钉了十字架，我也向世界钉了十字架。"
+    }
+  ],
+  llm: [
+    {
+      text: "Think of ChatGPT as a blurry JPEG of all the text on the Web",
+      source: "Ted Chiang",
+      gloss: "把 ChatGPT 想成整张网上所有文字的一张模糊 JPEG。"
+    },
+    {
+      text: "When we're dealing with sequences of words, lossy compression looks smarter than lossless compression",
+      source: "Ted Chiang",
+      gloss: "当我们面对的是词的序列时，有损压缩看起来比无损压缩更聪明。"
+    },
+    {
+      text: "It creates the illusion that ChatGPT understands the material",
+      source: "Ted Chiang",
+      gloss: "这造成一种错觉，仿佛 ChatGPT 理解了材料。"
+    },
+    {
+      text: "An LM is a system for haphazardly stitching together sequences of linguistic forms it has observed in its vast training data, according to probabilistic information about how they combine, but without any reference to meaning: a stochastic parrot",
+      source: "Bender & Gebru",
+      gloss: "语言模型是一套系统：按它在海量训练数据里见过的语言形式如何组合的概率信息，把这些形式胡乱缝在一起，却毫不参照意义：一只随机鹦鹉。"
+    },
+    {
+      text: "A system trained only on form has a priori no way to learn meaning",
+      source: "Bender & Koller",
+      gloss: "一个只在形式上受训的系统，先验上就没有学会意义的途径。"
+    },
+    {
+      text: "Sometimes I think it's as if aliens had landed and people haven't realized because they speak very good English",
+      source: "Hinton",
+      gloss: "有时我觉得就像外星人已经着陆，人们却没察觉，因为它们英语说得很好。"
+    },
+    {
+      text: "We've discovered the secret of immortality. The bad news is it's not for us",
+      source: "Hinton",
+      gloss: "我们发现了永生的秘密。坏消息是，那不是给我们的。"
+    },
+    {
+      text: "These things are totally different from us",
+      source: "Hinton",
+      gloss: "这些东西和我们完全不同。"
+    },
+    {
+      text: "Building smarter-than-human machines is an inherently dangerous endeavor",
+      source: "Jan Leike",
+      gloss: "建造比人更聪明的机器，本质上就是一件危险的事。"
+    },
+    {
+      text: "Safety culture and processes have taken a backseat to shiny products",
+      source: "Jan Leike",
+      gloss: "安全文化与流程已经给闪亮的产品让了座。"
+    },
+    {
+      text: "Tokenization is at the heart of a lot of weirdness in LLMs",
+      source: "Karpathy",
+      gloss: "分词处在大语言模型许多怪异之处的核心。"
+    },
+    {
+      text: "What is the real root of suffering? Tokenization",
+      source: "Karpathy",
+      gloss: "苦的真正根源是什么？分词。"
+    },
+    {
+      text: "A reflection of a mind is not a mind. It does not think",
+      source: "Shannon Vallor",
+      gloss: "心灵的映像并不是心灵。它并不思想。"
+    },
+    {
+      text: "AI systems mirror our own intelligence back to us",
+      source: "Shannon Vallor",
+      gloss: "人工智能系统把我们自己的智能镜像回给我们。"
+    },
+    {
+      text: "Understanding language requires understanding the world, and a machine exposed only to language cannot gain such an understanding",
+      source: "Melanie Mitchell",
+      gloss: "理解语言需要理解世界，而一台只接触语言的机器无法获得这种理解。"
+    },
+    {
+      text: "Language models are passive. They're fed all this text, they predict the next word",
+      source: "Melanie Mitchell",
+      gloss: "语言模型是被动的。它们被喂进这些文本，然后预测下一个词。"
+    },
+    {
+      text: "It's not sentient, it has no idea of the things that it is talking about",
+      source: "Gary Marcus",
+      gloss: "它没有知觉，对它正在谈论的事物毫无概念。"
+    },
+    {
+      text: "What it really is, is an autocomplete system that predicts next words and sentences",
+      source: "Gary Marcus",
+      gloss: "它实际上是一个预测下一个词、下一句的自动补全系统。"
+    },
+    {
+      text: "I like to think of language models like ChatGPT as a calculator for words",
+      source: "Simon Willison",
+      gloss: "我愿意把 ChatGPT 这类语言模型想成一台词语计算器。"
+    },
+    {
+      text: "It may be that today's large neural networks are slightly conscious",
+      source: "Sutskever",
+      gloss: "今天的大型神经网络，或许已经略有意识。"
+    },
+    {
+      text: "We call these models foundation models to underscore their critically central yet incomplete character",
+      source: "Foundation Models",
+      gloss: "我们把这些模型称为基础模型，是为了强调它们既处于关键中心、又并不完备。"
     }
   ]
 };

@@ -6,7 +6,8 @@
   const corpusEl = document.getElementById("katsu-corpus");
   const LAST_PREFIX = "katsu:last:";
   const CORPUS_KEY = "katsu:corpus";
-  const LABELS = { buddhist: "佛典", bible: "圣经" };
+  const LABELS = { buddhist: "佛典", bible: "圣经", llm: "大模型" };
+  const ORDER = ["buddhist", "bible", "llm"];
 
   let corpus = readCorpus();
   let pool = CORPORA[corpus];
@@ -20,7 +21,8 @@
   switchEl.addEventListener("click", toggleCorpus);
 
   function toggleCorpus() {
-    setCorpus(corpus === "buddhist" ? "bible" : "buddhist");
+    const i = ORDER.indexOf(corpus);
+    setCorpus(ORDER[(i + 1) % ORDER.length]);
   }
 
   function setCorpus(next) {
@@ -37,8 +39,9 @@
     document.title = saying.text;
     persistLast(index);
     paintSwitch();
-    sayingEl.classList.toggle("is-bible", corpus === "bible");
-    verseEl.classList.toggle("is-bible", corpus === "bible");
+    const latin = isLatin(saying.text);
+    sayingEl.classList.toggle("is-bible", latin);
+    verseEl.classList.toggle("is-bible", latin);
 
     verseEl.classList.remove("is-flash", "is-short", "is-long", "is-wrapped");
     verseEl.classList.add(sizeClass(saying.text));
@@ -87,7 +90,7 @@
     verseEl.style.removeProperty("text-indent");
     verseEl.style.removeProperty("font-size");
 
-    if (corpus === "bible") {
+    if (isLatin(text)) {
       paintVerse(text, true, saying.gloss);
       return;
     }
@@ -216,11 +219,15 @@
   function readCorpus() {
     try {
       const raw = localStorage.getItem(CORPUS_KEY);
-      if (raw === "bible" || raw === "buddhist") return raw;
+      if (raw === "bible" || raw === "buddhist" || raw === "llm") return raw;
     } catch {
       // fall through
     }
     return "buddhist";
+  }
+
+  function isLatin(text) {
+    return !/[\u3400-\u9fff]/.test(text);
   }
 
   function prefersReducedMotion() {
