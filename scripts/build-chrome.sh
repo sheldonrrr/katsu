@@ -26,9 +26,11 @@ import json
 from pathlib import Path
 
 manifest = json.loads(Path("manifest.json").read_text(encoding="utf-8"))
-name = str(manifest.get("name") or "extension").strip() or "extension"
+name = str(manifest.get("name") or "Katsu").strip() or "Katsu"
+if name.startswith("__MSG_"):
+    name = "Katsu"
 version = str(manifest.get("version") or "0.0.0").strip() or "0.0.0"
-slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in name).strip("-") or "extension"
+slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in name).strip("-") or "katsu"
 while "--" in slug:
     slug = slug.replace("--", "-")
 print(f"EXT_NAME={json.dumps(name)}")
@@ -49,9 +51,14 @@ REQUIRED=(
   newtab.css
   newtab.js
   sayings.js
+  i18n.js
   icons/icon16.png
   icons/icon48.png
   icons/icon128.png
+  _locales/en/messages.json
+  _locales/zh_CN/messages.json
+  _locales/zh_TW/messages.json
+  _locales/ja/messages.json
 )
 
 missing=0
@@ -85,9 +92,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
-cp newtab.html newtab.css newtab.js sayings.js "$STAGE/"
+cp newtab.html newtab.css newtab.js sayings.js i18n.js "$STAGE/"
 mkdir -p "$STAGE/icons"
 cp icons/icon16.png icons/icon48.png icons/icon128.png "$STAGE/icons/"
+for loc in en zh_CN zh_TW ja; do
+  mkdir -p "$STAGE/_locales/$loc"
+  cp "_locales/$loc/messages.json" "$STAGE/_locales/$loc/"
+done
 
 python3 - "$STAGE/manifest.json" <<'PY'
 import json
@@ -106,7 +117,7 @@ rm -f "$ZIP"
 (
   cd "$STAGE"
   # -X strips extra file attributes so the zip is closer to store-upload ready.
-  zip -X -q -r "$ZIP" manifest.json newtab.html newtab.css newtab.js sayings.js icons
+  zip -X -q -r "$ZIP" manifest.json newtab.html newtab.css newtab.js sayings.js i18n.js icons _locales
 )
 
 bytes="$(wc -c < "$ZIP" | tr -d ' ')"

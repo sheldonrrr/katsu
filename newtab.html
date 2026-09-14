@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>喝</title>
+    <title>Katsu</title>
     <link rel="stylesheet" href="newtab.css" />
   </head>
   <body>
@@ -14,12 +14,21 @@
       </article>
     </main>
     <footer class="katsu-bar">
-      <button type="button" class="katsu-switch" id="katsu-switch" aria-label="切换语料，当前佛典">
-        <span class="katsu-word">Katsu</span>
+      <div class="katsu-switch">
+        <button type="button" class="katsu-lang" id="katsu-lang" aria-haspopup="dialog" aria-expanded="false" aria-controls="lang-dialog" aria-label="Switch language">
+          <span class="katsu-word" id="katsu-word">Katsu</span>
+        </button>
         <span class="katsu-sep" aria-hidden="true">·</span>
-        <span class="katsu-corpus" id="katsu-corpus">佛典</span>
-      </button>
+        <button type="button" class="katsu-corpus-btn" id="katsu-switch" aria-label="Switch corpus">
+          <span class="katsu-corpus" id="katsu-corpus">Sutras</span>
+        </button>
+      </div>
     </footer>
+    <dialog class="lang-dialog" id="lang-dialog">
+      <p class="lang-dialog-title" id="lang-dialog-title"></p>
+      <div class="lang-dialog-list" id="lang-dialog-list"></div>
+    </dialog>
+    <script src="i18n.js"></script>
     <script src="sayings.js"></script>
     <script src="newtab.js"></script>
   </body>

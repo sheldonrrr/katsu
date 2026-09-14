@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Katsu",
-  "version": "1.0.0",
-  "description": "新標籤頁只留一句原典。一聲棒喝。",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "version": "1.1.0",
+  "description": "__MSG_extDescription__",
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },

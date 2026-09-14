@@ -130,6 +130,35 @@ body {
   appearance: none;
 }
 
+[data-locale="en"] .gloss {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.52rem;
+}
+
+[data-locale="zh-Hant"] .gloss,
+[data-locale="zh-Hant"] .gloss-tip,
+[data-locale="zh-Hant"] .source,
+[data-locale="zh-Hant"] .katsu-switch {
+  font-family: "PingFang TC", "Hiragino Sans CNS", "Noto Sans CJK TC",
+    "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+[data-locale="ja"] .gloss,
+[data-locale="ja"] .gloss-tip,
+[data-locale="ja"] .source,
+[data-locale="ja"] .katsu-switch {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
+    "Source Han Sans JP", "Yu Gothic", sans-serif;
+}
+
+[data-locale="en"] .gloss-tip,
+[data-locale="en"] .source,
+[data-locale="en"] .katsu-switch {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  letter-spacing: 0.02em;
+}
+
 .gloss:focus,
 .gloss:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--seal-ink) 70%, var(--seal));
@@ -207,6 +236,13 @@ body {
   text-indent: 0;
 }
 
+.verse.is-haiku {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP",
+    "Source Han Serif JP", "Songti SC", serif;
+  letter-spacing: 0.08em;
+  text-indent: 0.08em;
+}
+
 .katsu-bar {
   position: fixed;
   left: 0;
@@ -217,6 +253,11 @@ body {
   justify-content: center;
   padding: 0 1rem 1.15rem;
   pointer-events: none;
+  opacity: 0;
+}
+
+.katsu-bar.is-ready {
+  opacity: 1;
 }
 
 .katsu-switch {
@@ -224,8 +265,6 @@ body {
   display: inline-flex;
   align-items: baseline;
   gap: 0.55rem;
-  border: 0;
-  background: transparent;
   color: color-mix(in srgb, var(--bone) 28%, transparent);
   font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
     "Source Han Sans SC", "Microsoft YaHei", sans-serif;
@@ -233,6 +272,16 @@ body {
   font-weight: 400;
   letter-spacing: 0.08em;
   line-height: 1;
+}
+
+.katsu-lang,
+.katsu-corpus-btn {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
   cursor: pointer;
   appearance: none;
 }
@@ -244,18 +293,38 @@ body {
   letter-spacing: 0.12em;
 }
 
+[data-locale="zh-Hant"] .katsu-word {
+  font-family: "Songti TC", "LiSong Pro", "Noto Serif CJK TC",
+    "Source Han Serif TC", serif;
+}
+
+[data-locale="ja"] .katsu-word {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP",
+    "Source Han Serif JP", serif;
+}
+
+[data-locale="en"] .katsu-word {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  letter-spacing: 0.08em;
+}
+
 .katsu-sep {
   opacity: 0.7;
 }
 
-.katsu-switch:hover,
-.katsu-switch:focus,
-.katsu-switch:focus-visible {
+.katsu-lang:hover,
+.katsu-lang:focus,
+.katsu-lang:focus-visible,
+.katsu-corpus-btn:hover,
+.katsu-corpus-btn:focus,
+.katsu-corpus-btn:focus-visible {
   color: color-mix(in srgb, var(--bone) 48%, transparent);
 }
 
-.katsu-switch:focus,
-.katsu-switch:focus-visible {
+.katsu-lang:focus,
+.katsu-lang:focus-visible,
+.katsu-corpus-btn:focus,
+.katsu-corpus-btn:focus-visible {
   outline: 1px solid var(--hair);
   outline-offset: 4px;
 }
@@ -267,6 +336,96 @@ body {
   height: 1px;
   margin: 0 auto 1.75rem;
   background: var(--hair);
+}
+
+.lang-dialog {
+  width: min(16.5rem, calc(100% - 2rem));
+  margin: auto;
+  padding: 1.35rem 1.4rem 1.05rem;
+  border: 1px solid var(--hair);
+  background: #141311;
+  color: var(--bone);
+}
+
+.lang-dialog::backdrop {
+  background: color-mix(in srgb, var(--ink) 74%, transparent);
+}
+
+.lang-dialog-title {
+  margin-bottom: 0.85rem;
+  color: var(--mute);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-align: center;
+}
+
+[data-locale="zh-Hant"] .lang-dialog-title {
+  font-family: "PingFang TC", "Hiragino Sans CNS", "Noto Sans CJK TC",
+    "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+[data-locale="ja"] .lang-dialog-title {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
+    "Source Han Sans JP", "Yu Gothic", sans-serif;
+}
+
+[data-locale="en"] .lang-dialog-title {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  letter-spacing: 0.06em;
+}
+
+.lang-dialog-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.lang-option {
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--bone) 58%, transparent);
+  padding: 0.52rem 0;
+  font-size: 0.98rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  appearance: none;
+}
+
+.lang-option[data-locale="zh-Hans"] {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+.lang-option[data-locale="zh-Hant"] {
+  font-family: "PingFang TC", "Hiragino Sans CNS", "Noto Sans CJK TC",
+    "Source Han Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+.lang-option[data-locale="ja"] {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP",
+    "Source Han Sans JP", "Yu Gothic", sans-serif;
+}
+
+.lang-option[data-locale="en"] {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.lang-option.is-current,
+.lang-option:hover,
+.lang-option:focus,
+.lang-option:focus-visible {
+  color: var(--bone);
+}
+
+.lang-option:focus,
+.lang-option:focus-visible {
+  outline: 1px solid var(--hair);
+  outline-offset: 3px;
 }
 
 @keyframes rise {
@@ -303,6 +462,12 @@ body {
   .verse.is-bible.is-long {
     letter-spacing: 0.02em;
     text-indent: 0;
+  }
+
+  .verse.is-haiku.is-short,
+  .verse.is-haiku.is-long {
+    letter-spacing: 0.06em;
+    text-indent: 0.06em;
   }
 }
 
