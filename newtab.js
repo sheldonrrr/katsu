@@ -14,6 +14,8 @@
   const CORPUS_KEY = "katsu:corpus";
   const ORDER = ["buddhist", "haiku", "bible", "llm"];
   const CORPUS_IDS = new Set(ORDER);
+  const QUOTE_ICON =
+    "M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M7.194 6.766a1.7 1.7 0 0 0-.227-.272 1.5 1.5 0 0 0-.469-.324l-.008-.004A1.8 1.8 0 0 0 5.734 6C4.776 6 4 6.746 4 7.667c0 .92.776 1.666 1.734 1.666.343 0 .662-.095.931-.26-.137.389-.39.804-.81 1.22a.405.405 0 0 0 .011.59c.173.16.447.155.614-.01 1.334-1.329 1.37-2.758.941-3.706a2.5 2.5 0 0 0-.227-.4zM11 9.073c-.136.389-.39.804-.81 1.22a.405.405 0 0 0 .012.59c.172.16.446.155.613-.01 1.334-1.329 1.37-2.758.942-3.706a2.5 2.5 0 0 0-.228-.4 1.7 1.7 0 0 0-.227-.273 1.5 1.5 0 0 0-.469-.324l-.008-.004A1.8 1.8 0 0 0 10.07 6c-.957 0-1.734.746-1.734 1.667 0 .92.777 1.666 1.734 1.666.343 0 .662-.095.931-.26z";
 
   let locale = detectLocale();
   let corpus = readCorpus();
@@ -221,7 +223,12 @@
     const mark = document.createElement("button");
     mark.type = "button";
     mark.className = "gloss";
-    mark.textContent = ui.gloss;
+    if (locale === "en") {
+      mark.classList.add("is-icon");
+      mark.append(quoteIcon());
+    } else {
+      mark.textContent = ui.gloss;
+    }
     mark.setAttribute("aria-label", ui.glossLabel);
     mark.setAttribute("aria-describedby", "gloss-tip");
     mark.addEventListener("click", (event) => event.stopPropagation());
@@ -238,13 +245,23 @@
     return frag;
   }
 
+  function quoteIcon() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 16 16");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", QUOTE_ICON);
+    svg.append(path);
+    return svg;
+  }
+
   function fits() {
     const stage = document.querySelector(".stage");
     const style = getComputedStyle(stage);
     const pad =
       parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-    const budget = Math.min(stage.clientWidth - pad, window.innerWidth * 0.94);
-    return verseEl.scrollWidth <= budget + 1;
+    return verseEl.scrollWidth <= stage.clientWidth - pad + 1;
   }
 
   function sizeClass(text) {

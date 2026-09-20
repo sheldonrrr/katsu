@@ -30,7 +30,9 @@ body {
 
 .stage {
   min-height: 100%;
+  min-width: 0;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: clamp(2rem, 8vw, 6rem);
   padding-bottom: clamp(3.25rem, 8vw, 6.5rem);
@@ -41,7 +43,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1.75rem;
-  max-width: min(58rem, 94vw);
+  max-width: 100%;
+  min-width: 0;
   text-align: center;
 }
 
@@ -64,7 +67,8 @@ body {
   text-indent: 0.16em;
   white-space: nowrap;
   max-width: 100%;
-  padding: 0.7rem 1rem 0 0.2rem;
+  min-width: 0;
+  padding: 0.7rem 1rem 0;
 }
 
 .verse.is-flash {
@@ -89,6 +93,8 @@ body {
 
 .verse.is-wrapped {
   white-space: normal;
+  text-indent: 0;
+  overflow-wrap: break-word;
 }
 
 .verse-end {
@@ -130,9 +136,19 @@ body {
   appearance: none;
 }
 
-[data-locale="en"] .gloss {
-  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 0.52rem;
+.gloss.is-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  background: transparent;
+  border-radius: 0;
+  color: var(--seal);
+}
+
+.gloss.is-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 [data-locale="zh-Hant"] .gloss,
@@ -167,12 +183,15 @@ body {
 
 .gloss-tip {
   position: absolute;
-  left: 50%;
+  left: auto;
+  right: 0;
   bottom: calc(100% + 0.55rem);
   z-index: 2;
-  min-width: 8rem;
-  max-width: min(22rem, 72vw);
-  padding: 0.42rem 0.62rem;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: min(20rem, 80vw);
+  max-width: min(28rem, 84vw);
+  padding: 0.55rem 0.85rem;
   border: 1px solid var(--hair);
   background: #1c1b18;
   color: var(--bone);
@@ -184,19 +203,18 @@ body {
   letter-spacing: 0.04em;
   text-align: left;
   text-indent: 0;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
   white-space: normal;
-  opacity: 0;
-  visibility: hidden;
+  display: none;
   pointer-events: none;
-  transform: translateX(-50%);
 }
 
 .verse-end:hover .gloss-tip,
 .gloss:hover + .gloss-tip,
 .gloss:focus + .gloss-tip,
 .gloss:focus-visible + .gloss-tip {
-  opacity: 1;
-  visibility: visible;
+  display: block;
 }
 
 .source {
