@@ -1,4 +1,4 @@
-const LOCALES = ["zh-Hans", "zh-Hant", "ja", "en"];
+const LOCALES = ["zh-Hans", "zh-Hant", "ja", "en", "ro", "ar"];
 const LOCALE_KEY = "katsu:locale";
 
 const UI = {
@@ -7,40 +7,86 @@ const UI = {
     gloss: "释",
     glossLabel: "解释",
     htmlLang: "zh-Hans",
-    corpora: { buddhist: "佛典", haiku: "俳句", bible: "圣经", llm: "大模型" },
-    switchCorpus: (label) => `切换语料，当前${label}`,
+    corpora: { buddhist: "佛典", haiku: "俳句", bible: "圣经", orthodox: "东正教", quran: "古兰经", llm: "大模型" },
+    switchCorpus: "切换语料",
     switchLang: "切换语言",
-    chooseLang: "选择界面语言"
+    chooseLang: "选择界面语言",
+    chooseCorpus: "选择语料",
+    about: "关于"
   },
   "zh-Hant": {
     name: "棒喝",
     gloss: "釋",
     glossLabel: "解釋",
     htmlLang: "zh-Hant",
-    corpora: { buddhist: "佛典", haiku: "俳句", bible: "聖經", llm: "大模型" },
-    switchCorpus: (label) => `切換語料，目前${label}`,
+    corpora: { buddhist: "佛典", haiku: "俳句", bible: "聖經", orthodox: "東正教", quran: "古蘭經", llm: "大模型" },
+    switchCorpus: "切換語料",
     switchLang: "切換語言",
-    chooseLang: "選擇介面語言"
+    chooseLang: "選擇介面語言",
+    chooseCorpus: "選擇語料",
+    about: "關於"
   },
   ja: {
     name: "喝",
     gloss: "釈",
     glossLabel: "解説",
     htmlLang: "ja",
-    corpora: { buddhist: "仏典", haiku: "俳句", bible: "聖書", llm: "LLM" },
-    switchCorpus: (label) => `コーパスを切替、現在は${label}`,
+    corpora: { buddhist: "仏典", haiku: "俳句", bible: "聖書", orthodox: "正教", quran: "クルアーン", llm: "LLM" },
+    switchCorpus: "コーパスを切替",
     switchLang: "言語を切替",
-    chooseLang: "表示言語"
+    chooseLang: "表示言語",
+    chooseCorpus: "コーパス",
+    about: "について"
   },
   en: {
     name: "Katsu",
     gloss: "?",
     glossLabel: "Explain",
     htmlLang: "en",
-    corpora: { buddhist: "Sutras", haiku: "Haiku", bible: "Bible", llm: "Models" },
-    switchCorpus: (label) => `Switch corpus, current ${label}`,
+    corpora: { buddhist: "Sutras", haiku: "Haiku", bible: "Bible", orthodox: "Orthodox", quran: "Quran", llm: "Models" },
+    switchCorpus: "Switch corpus",
     switchLang: "Switch language",
-    chooseLang: "Interface language"
+    chooseLang: "Interface language",
+    chooseCorpus: "Corpus",
+    about: "About"
+  },
+  ro: {
+    name: "Katsu",
+    gloss: "?",
+    glossLabel: "Tâlcuire",
+    htmlLang: "ro",
+    corpora: {
+      buddhist: "Sutre",
+      haiku: "Haiku",
+      bible: "Biblie",
+      orthodox: "Ortodox",
+      quran: "Coran",
+      llm: "Modele"
+    },
+    switchCorpus: "Schimbă corpusul",
+    switchLang: "Schimbă limba",
+    chooseLang: "Limba interfeței",
+    chooseCorpus: "Corpusul",
+    about: "Despre"
+  },
+  ar: {
+    name: "Katsu",
+    gloss: "؟",
+    glossLabel: "تفسير",
+    htmlLang: "ar",
+    corpora: {
+      buddhist: "بوذية",
+      haiku: "هايكو",
+      bible: "الكتاب",
+      orthodox: "أرثوذكسية",
+      quran: "القرآن",
+      llm: "نماذج"
+    },
+    switchCorpus: "تبديل المتن",
+    switchLang: "تبديل اللغة",
+    chooseLang: "لغة الواجهة",
+    chooseCorpus: "المتن",
+    about: "عن"
   }
 };
 
@@ -48,7 +94,18 @@ const LOCALE_NATIVE = {
   "zh-Hans": "简体中文",
   "zh-Hant": "繁體中文",
   ja: "日本語",
-  en: "English"
+  en: "English",
+  ro: "Română",
+  ar: "العربية"
+};
+
+const CORPUS_NATIVE = {
+  buddhist: { text: "佛典", lang: "zh-Hant" },
+  haiku: { text: "俳句", lang: "ja" },
+  bible: { text: "Bible", lang: "en" },
+  orthodox: { text: "Orthodox", lang: "en" },
+  quran: { text: "القرآن", lang: "ar" },
+  llm: { text: "Models", lang: "en" }
 };
 
 const SOURCE_META = {
@@ -192,6 +249,89 @@ const SOURCE_META = {
       en: "https://en.wikipedia.org/wiki/Linji_Yixuan"
     }
   },
+  金剛經: {
+    title: {
+      "zh-Hans": "金刚经",
+      "zh-Hant": "金剛經",
+      ja: "金剛般若経",
+      en: "Diamond Sutra"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/金剛經",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/金剛經",
+      ja: "https://ja.wikipedia.org/wiki/金剛般若経",
+      en: "https://en.wikipedia.org/wiki/Diamond_Sutra"
+    }
+  },
+  般若心經: {
+    title: {
+      "zh-Hans": "般若心经",
+      "zh-Hant": "般若心經",
+      ja: "般若心経",
+      en: "Heart Sutra"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/般若心經",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/般若心經",
+      ja: "https://ja.wikipedia.org/wiki/般若心経",
+      en: "https://en.wikipedia.org/wiki/Heart_Sutra"
+    }
+  },
+  六祖壇經: {
+    title: {
+      "zh-Hans": "六祖坛经",
+      "zh-Hant": "六祖壇經",
+      ja: "六祖壇経",
+      en: "Platform Sutra"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/六祖壇經",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/六祖壇經",
+      ja: "https://ja.wikipedia.org/wiki/六祖壇経",
+      en: "https://en.wikipedia.org/wiki/Platform_Sutra"
+    }
+  },
+  大般涅槃經: {
+    title: {
+      "zh-Hans": "大般涅槃经",
+      "zh-Hant": "大般涅槃經",
+      ja: "大般涅槃経",
+      en: "Nirvana Sutra"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/大般涅槃經",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/大般涅槃經",
+      ja: "https://ja.wikipedia.org/wiki/大般涅槃経",
+      en: "https://en.wikipedia.org/wiki/Mahaparinirvana_Sutra"
+    }
+  },
+  中論: {
+    title: {
+      "zh-Hans": "中论",
+      "zh-Hant": "中論",
+      ja: "中論",
+      en: "Middle Way"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/中論",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/中論",
+      ja: "https://ja.wikipedia.org/wiki/中論",
+      en: "https://en.wikipedia.org/wiki/Mūlamadhyamakakārikā"
+    }
+  },
+  信心銘: {
+    title: {
+      "zh-Hans": "信心铭",
+      "zh-Hant": "信心銘",
+      ja: "信心銘",
+      en: "Faith in Mind"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/信心銘",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/信心銘",
+      en: "https://en.wikipedia.org/wiki/Xinxin_Ming"
+    }
+  },
   約伯記: {
     title: {
       "zh-Hans": "约伯记",
@@ -292,8 +432,8 @@ const SOURCE_META = {
   },
   "Ted Chiang": {
     title: {
-      "zh-Hans": "姜峯楠",
-      "zh-Hant": "姜峯楠",
+      "zh-Hans": "Ted Chiang",
+      "zh-Hant": "Ted Chiang",
       ja: "Ted Chiang",
       en: "Ted Chiang"
     },
@@ -334,8 +474,8 @@ const SOURCE_META = {
   },
   Hinton: {
     title: {
-      "zh-Hans": "杰弗里·辛顿",
-      "zh-Hant": "傑弗里·辛頓",
+      "zh-Hans": "Hinton",
+      "zh-Hant": "Hinton",
       ja: "Hinton",
       en: "Hinton"
     },
@@ -458,6 +598,90 @@ const SOURCE_META = {
       en: "https://en.wikipedia.org/wiki/Foundation_model"
     }
   },
+  "Dario Amodei": {
+    title: {
+      "zh-Hans": "Dario Amodei",
+      "zh-Hant": "Dario Amodei",
+      ja: "Dario Amodei",
+      en: "Dario Amodei",
+      ro: "Dario Amodei"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/达里奥·阿莫代伊",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/达里奥·阿莫代伊",
+      ja: "https://ja.wikipedia.org/wiki/ダリオ・アモデイ",
+      en: "https://en.wikipedia.org/wiki/Dario_Amodei"
+    }
+  },
+  "Sam Altman": {
+    title: {
+      "zh-Hans": "Sam Altman",
+      "zh-Hant": "Sam Altman",
+      ja: "Sam Altman",
+      en: "Sam Altman",
+      ro: "Sam Altman"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/萨姆·奥尔特曼",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/萨姆·奥尔特曼",
+      ja: "https://ja.wikipedia.org/wiki/サム・アルトマン",
+      en: "https://en.wikipedia.org/wiki/Sam_Altman"
+    }
+  },
+  "Ethan Mollick": {
+    title: {
+      "zh-Hans": "Ethan Mollick",
+      "zh-Hant": "Ethan Mollick",
+      ja: "Ethan Mollick",
+      en: "Ethan Mollick",
+      ro: "Ethan Mollick"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Ethan_Mollick"
+    }
+  },
+  "Mustafa Suleyman": {
+    title: {
+      "zh-Hans": "Mustafa Suleyman",
+      "zh-Hant": "Mustafa Suleyman",
+      ja: "Mustafa Suleyman",
+      en: "Mustafa Suleyman",
+      ro: "Mustafa Suleyman"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Mustafa_Suleyman"
+    }
+  },
+  "Fei-Fei Li": {
+    title: {
+      "zh-Hans": "Fei-Fei Li",
+      "zh-Hant": "Fei-Fei Li",
+      ja: "Fei-Fei Li",
+      en: "Fei-Fei Li",
+      ro: "Fei-Fei Li"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/李飞飞",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/李飞飞",
+      ja: "https://ja.wikipedia.org/wiki/フェイフェイ・リ",
+      en: "https://en.wikipedia.org/wiki/Fei-Fei_Li"
+    }
+  },
+  "Yann LeCun": {
+    title: {
+      "zh-Hans": "Yann LeCun",
+      "zh-Hant": "Yann LeCun",
+      ja: "Yann LeCun",
+      en: "Yann LeCun",
+      ro: "Yann LeCun"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/杨立昆",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/杨立昆",
+      ja: "https://ja.wikipedia.org/wiki/ヤン・ルカン",
+      en: "https://en.wikipedia.org/wiki/Yann_LeCun"
+    }
+  },
   松尾芭蕉: {
     title: {
       "zh-Hans": "松尾芭蕉",
@@ -541,6 +765,293 @@ const SOURCE_META = {
       ja: "https://ja.wikipedia.org/wiki/種田山頭火",
       en: "https://en.wikipedia.org/wiki/Sant%C5%8Dka_Taneda"
     }
+  },
+  "Rugăciunea lui Iisus": {
+    title: {
+      "zh-Hans": "耶稣祷文",
+      "zh-Hant": "耶穌禱文",
+      ja: "イエスの祈り",
+      en: "Jesus Prayer",
+      ro: "Rugăciunea lui Iisus"
+    },
+    wiki: {
+      "zh-Hans": "https://zh.wikipedia.org/wiki/耶稣祷文",
+      "zh-Hant": "https://zh.wikipedia.org/wiki/耶稣祷文",
+      ro: "https://ro.wikipedia.org/wiki/Rugăciunea_lui_Iisus",
+      en: "https://en.wikipedia.org/wiki/Jesus_Prayer"
+    }
+  },
+  Ectenie: {
+    title: {
+      "zh-Hans": "连祷",
+      "zh-Hant": "連禱",
+      ja: "連祷",
+      en: "Ektenia",
+      ro: "Ectenie"
+    },
+    wiki: {
+      ro: "https://ro.wikipedia.org/wiki/Ectenie",
+      en: "https://en.wikipedia.org/wiki/Ektenia"
+    }
+  },
+  "Troparul Învierii": {
+    title: {
+      "zh-Hans": "复活赞词",
+      "zh-Hant": "復活讚詞",
+      ja: "復活の讃詞",
+      en: "Paschal troparion",
+      ro: "Troparul Învierii"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Paschal_troparion"
+    }
+  },
+  Trisaghion: {
+    title: {
+      "zh-Hans": "三圣颂",
+      "zh-Hant": "三聖頌",
+      ja: "三聖頌",
+      en: "Trisagion",
+      ro: "Trisaghion"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Trisagion"
+    }
+  },
+  "Mica doxologie": {
+    title: {
+      "zh-Hans": "小光荣颂",
+      "zh-Hant": "小光榮頌",
+      ja: "小栄頌",
+      en: "Little doxology",
+      ro: "Mica doxologie"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Gloria_Patri"
+    }
+  },
+  "Lumină lină": {
+    title: {
+      "zh-Hans": "柔和之光",
+      "zh-Hant": "柔和之光",
+      ja: "静かなる光",
+      en: "Phos Hilaron",
+      ro: "Lumină lină"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Phos_Hilaron"
+    }
+  },
+  "Dumnezeiasca Liturghie": {
+    title: {
+      "zh-Hans": "神圣礼仪",
+      "zh-Hant": "神聖禮儀",
+      ja: "聖体礼儀",
+      en: "Divine Liturgy",
+      ro: "Dumnezeiasca Liturghie"
+    },
+    wiki: {
+      ro: "https://ro.wikipedia.org/wiki/Sfânta_Liturghie",
+      en: "https://en.wikipedia.org/wiki/Divine_Liturgy"
+    }
+  },
+  "Avva Moise": {
+    title: {
+      "zh-Hans": "摩西神父",
+      "zh-Hant": "摩西神父",
+      ja: "聖モイセス",
+      en: "Abba Moses",
+      ro: "Avva Moise"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Moses_the_Black"
+    }
+  },
+  "Avva Arsenie": {
+    title: {
+      "zh-Hans": "阿尔塞尼",
+      "zh-Hant": "阿爾塞尼",
+      ja: "アルセニオス",
+      en: "Abba Arsenius",
+      ro: "Avva Arsenie"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Arsenius_the_Great"
+    }
+  },
+  "Avva Antonie": {
+    title: {
+      "zh-Hans": "大安东尼",
+      "zh-Hant": "大安東尼",
+      ja: "大アントニオス",
+      en: "Abba Anthony",
+      ro: "Avva Antonie"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Anthony_the_Great"
+    }
+  },
+  "Avva Sisoe": {
+    title: {
+      "zh-Hans": "西索伊斯",
+      "zh-Hant": "西索伊斯",
+      ja: "シソエス",
+      en: "Abba Sisoes",
+      ro: "Avva Sisoe"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Sisoes_the_Great"
+    }
+  },
+  Evagrie: {
+    title: {
+      "zh-Hans": "埃瓦格里乌斯",
+      "zh-Hant": "埃瓦格里烏斯",
+      ja: "エヴァグリオス",
+      en: "Evagrius Ponticus",
+      ro: "Evagrie"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/Evagrius_Ponticus"
+    }
+  },
+  "Avva Ioan Colov": {
+    title: {
+      "zh-Hans": "矮约翰",
+      "zh-Hant": "矮約翰",
+      ja: "小ヨハネ",
+      en: "Abba John the Dwarf",
+      ro: "Avva Ioan Colov"
+    },
+    wiki: {
+      en: "https://en.wikipedia.org/wiki/John_the_Dwarf"
+    }
+  },
+  الفاتحة: {
+    title: {
+      "zh-Hans": "开端章",
+      "zh-Hant": "開端章",
+      ja: "開端",
+      en: "The Opening",
+      ro: "Al-Fatiha",
+      ar: "الفاتحة"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الفاتحة",
+      en: "https://en.wikipedia.org/wiki/Al-Fatiha"
+    }
+  },
+  البقرة: {
+    title: {
+      "zh-Hans": "黄牛章",
+      "zh-Hant": "黃牛章",
+      ja: "雌牛",
+      en: "The Cow",
+      ro: "Al-Baqara",
+      ar: "البقرة"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_البقرة",
+      en: "https://en.wikipedia.org/wiki/Al-Baqara"
+    }
+  },
+  الرعد: {
+    title: {
+      "zh-Hans": "雷霆章",
+      "zh-Hant": "雷霆章",
+      ja: "雷霆",
+      en: "The Thunder",
+      ro: "Ar-Ra'd",
+      ar: "الرعد"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الرعد",
+      en: "https://en.wikipedia.org/wiki/Ar-Ra%27d"
+    }
+  },
+  الشرح: {
+    title: {
+      "zh-Hans": "开拓章",
+      "zh-Hant": "開拓章",
+      ja: "開胸",
+      en: "The Relief",
+      ro: "Ash-Sharh",
+      ar: "الشرح"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الشرح",
+      en: "https://en.wikipedia.org/wiki/Ash-Sharh"
+    }
+  },
+  الإخلاص: {
+    title: {
+      "zh-Hans": "忠诚章",
+      "zh-Hant": "忠誠章",
+      ja: "純正",
+      en: "The Sincerity",
+      ro: "Al-Ikhlas",
+      ar: "الإخلاص"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الإخلاص",
+      en: "https://en.wikipedia.org/wiki/Al-Ikhlas"
+    }
+  },
+  "آل عمران": {
+    title: {
+      "zh-Hans": "仪姆兰的家属章",
+      "zh-Hant": "儀姆蘭的家屬章",
+      ja: "イムラーン家",
+      en: "The Family of Imran",
+      ro: "Ali 'Imran",
+      ar: "آل عمران"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_آل_عمران",
+      en: "https://en.wikipedia.org/wiki/Al_Imran"
+    }
+  },
+  الحجرات: {
+    title: {
+      "zh-Hans": "寝室章",
+      "zh-Hant": "寢室章",
+      ja: "部屋",
+      en: "The Rooms",
+      ro: "Al-Hujurat",
+      ar: "الحجرات"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الحجرات",
+      en: "https://en.wikipedia.org/wiki/Al-Hujurat"
+    }
+  },
+  الضحى: {
+    title: {
+      "zh-Hans": "上午章",
+      "zh-Hant": "上午章",
+      ja: "朝",
+      en: "The Morning Hours",
+      ro: "Ad-Duha",
+      ar: "الضحى"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الضحى",
+      en: "https://en.wikipedia.org/wiki/Ad-Duhaa"
+    }
+  },
+  الرحمن: {
+    title: {
+      "zh-Hans": "至仁主章",
+      "zh-Hant": "至仁主章",
+      ja: "慈悲あまねく御方",
+      en: "The Merciful",
+      ro: "Ar-Rahman",
+      ar: "الرحمن"
+    },
+    wiki: {
+      ar: "https://ar.wikipedia.org/wiki/سورة_الرحمن",
+      en: "https://en.wikipedia.org/wiki/Ar-Rahman"
+    }
   }
 };
 
@@ -549,6 +1060,8 @@ function localeFromTag(raw) {
   if (!tag) return undefined;
   if (tag.startsWith("ja")) return "ja";
   if (tag.startsWith("en")) return "en";
+  if (tag.startsWith("ro")) return "ro";
+  if (tag.startsWith("ar")) return "ar";
   if (tag.startsWith("zh")) {
     return /(hant|tw|hk|mo)/.test(tag) ? "zh-Hant" : "zh-Hans";
   }
@@ -564,6 +1077,7 @@ function detectLocale() {
   try {
     const saved = localStorage.getItem(LOCALE_KEY);
     if (LOCALES.includes(saved)) return saved;
+    // An unrecognized saved tag is left untouched. Load never writes the default.
   } catch {
     // Private mode or blocked storage should not stop the page.
   }
@@ -603,13 +1117,20 @@ function sourceHref(source, locale) {
 
 function formatSource(source, locale) {
   const title = sourceTitle(source, locale);
-  if (locale === "en" || !/[\u3400-\u9fff]/.test(title)) return title;
+  if (locale === "en" || locale === "ro" || locale === "ar" || !/[\u3400-\u9fff]/.test(title)) return title;
   return `《${title}》`;
+}
+
+function verseOf(saying, locale) {
+  if (locale === "ja" && saying.ja) return saying.ja;
+  return saying.text;
 }
 
 function glossOf(saying, locale) {
   const gloss = saying.gloss;
   if (!gloss) return "";
   if (typeof gloss === "string") return gloss;
-  return gloss[locale] || gloss["zh-Hans"] || gloss.en || "";
+  if (gloss[locale]) return gloss[locale];
+  if (locale === "ro" || locale === "ar") return gloss.en || "";
+  return gloss["zh-Hans"] || gloss.en || "";
 }
